@@ -1,0 +1,13 @@
+/* pages/preview/preview.wxml.wxss */
+.preview{
+  width: 70%;
+  height: 70%;
+  align-items: center;
+}
+.comment-preview{
+  width: 50%;
+}
+.upload{
+  background: greenyellow;
+  width: 50%;
+}

@@ -1,0 +1,164 @@
+//index.js
+
+// 引入高德地图api
+var database = require('fromdatabase.js');
+//获取应用实例
+const app = getApp()
+
+var markersData = [];
+Page({
+  data: {
+    markers: [],
+    circles: [],
+    latitude: '',
+    longitude: '',
+    textData: {},
+    scale: 18,
+    maxScale: 20,
+    minScale: 16,
+    // 20 经度 0.002 
+    // 19 经度 0.004 直径 350m
+    // 18 经度 0.008      700m
+    // 17 经度 0.016      1500m
+    // 16 经度 0.032      3000m
+    mapContext: null,
+    photoPath: '',
+    uploadUrl: 'https://www.wantcu.top/highlight/newHighlight',
+    // uploadUrl:'https://www.wantcu.top/users/newSite',
+    latitude: '',
+    longtitude: '',
+    description: 'des',
+    msg: 'msg'
+  },
+  onLoad: function () {
+    var that = this;
+    that.mapContext = wx.createMapContext("map");
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude,
+        })
+      }
+    })  
+
+  },
+  // 点击marker
+  makertap: function (e) {
+    var id = e.markerId;
+    var that = this;
+    that.showMarkerInfo(markersData, id);
+    that.changeMarkerColor(markersData, id);
+  },
+  // 地图范围变化
+  regionchange(e) {
+    var that = this;
+    if (e.type == 'end') {
+      that.getMapCenterLocation(function (res) {
+        // 坐标变化
+        that.data.latitude = res.latitude;
+        that.data.longitude = res.longitude;
+      });
+    }
+  },
+  // 设置点击marker后显示的数据
+  showMarkerInfo: function (data, i) {
+    var that = this;
+    that.setData({
+      textData: {
+        description: data[i].description,
+        message: data[i].message,
+        rate: data[i].rate,
+        snapshot: data[i].snapshot
+      }
+    });
+  },
+  // 修改点击marker后的图片
+  changeMarkerColor: function (data, i) {
+    var that = this;
+    var markers = [];
+    for (var j = 0; j < data.length; j++) {
+      if (j == i) {
+        data[j].iconPath = "marker_checked.png";
+      } else {
+        data[j].iconPath = "marker.png";
+      }
+      markers.push(data[j]);
+    }
+    that.setData({
+      markers: markers
+    });
+  },
+  // 获取地图中心点的位置坐标
+  getMapCenterLocation: function (callback) {
+    var that = this;
+    that.mapContext.getCenterLocation({
+      success: function (res) {
+        callback(res);
+      }
+    })
+  },
+  scalesmaller(){
+    var that = this;
+    var _scale = that.data.scale;
+    if (_scale > that.data.minScale){
+      that.setData({
+        scale: _scale - 1
+      })
+    }
+  },
+  scalelarger(){
+    var that = this;
+    var _scale = that.data.scale;
+    if (_scale < that.data.maxScale) {
+      that.setData({
+        scale: _scale + 1
+      })
+    }
+  },
+  findPoints(){
+    var that = this;
+    var longitude = that.data.longitude;
+    var latitude = that.data.latitude
+    var scale = that.data.scale
+    database.queryPointsWithScale(longitude, latitude, scale, function (data){
+      markersData = data;
+      that.setData({
+        markers : markersData,
+        textData: {
+          name: '',
+          desc: ''
+        }
+      });
+    });
+  },
+  newPoint(){
+    var that = this
+    wx.showActionSheet({
+      itemList: ['chooseImage','take a photo'],
+      success: function(res){
+        that.chooseImage();
+      },
+      fail: function(res){
+        console.log(res.errMsg)
+      }
+    })
+  },
+  chooseImage() {
+    var that = this
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        that.data.photoPath = res.tempFilePaths;
+        console.log(that.data.photoPath);
+        console.log("In chooseImage");
+        wx.navigateTo({
+          url: '../preview/preview?photoPath=' + that.data.photoPath 
+        })
+      }
+    })
+  },
+})

@@ -1,0 +1,8 @@
+/* pages/main/main.wxss */
+.uploadImage{
+  color: #f00;
+  border: 3rem;
+  width: 50%;
+  height: 20dp;
+  -moz-text-size-adjust: true;
+}

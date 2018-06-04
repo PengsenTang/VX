@@ -1,0 +1,27 @@
+<view class="map_controller">
+<button type="default" size="mini" bindtap="scalesmaller">缩小</button>
+<button type="default" size="mini" bindtap="scalelarger">放大</button>
+<button type="default" size="mini" bindtap="findPoints">发现</button>
+<button type="default" size="mini" bindtap="newPoint">新建</button>
+</view>
+<view class="map_container">
+  <map class="map" id="map"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    circles="{{circles}}"
+    bindmarkertap="makertap"  
+    bindregionchange="regionchange"
+  >
+  <!-- bindmarkertap 为绑定的点击marker的处理函数 -->
+  <!-- bindregionchange 为绑定的移动地图后的处理函数 -->
+  <!-- bindcontroltap 为绑定的缩放控件的处理函数 -->
+  </map>
+</view>
+<view class="map_text">
+  <text>地点: {{textData.description}}</text>
+  <text>信息: {{textData.message}}</text>
+  <text>评分: {{textData.rate}}</text>
+  <image src="{{textData.snapshot}}"></image>
+</view>

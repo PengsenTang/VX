@@ -1,0 +1,8 @@
+<!--pages/preview/preview.wxml.wxml-->
+<view class='container'>
+<view class='preview'>
+  <image src = "{{photoPath}}" class='image-preview'></image>
+  <input placeholder='{{msg}}' class='comment-preview' bindinput='commentInput'></input>
+  <button class='upload' bindtap='uploadFile'>upload</button>
+</view>
+</view>

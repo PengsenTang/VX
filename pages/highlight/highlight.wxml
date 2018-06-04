@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<view class="container">
+            <view class="link" bindtap='back2Index'>Back2Index ></view>
+          <button bindtap='withOpenid'>does open id work here?</button>
+              <view class="input-panel">       
+        <button type="default" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" bindtap="uploadFile" hover-class="other-button-hover"> uploadFile </button>
+        <button type="default" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" bindtap="chooseImage" hover-class="other-button-hover"> choosePhoto </button>
+    </view>
+</view>
