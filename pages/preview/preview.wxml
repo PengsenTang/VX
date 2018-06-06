@@ -2,7 +2,19 @@
 <view class='container'>
 <view class='preview'>
   <image src = "{{photoPath}}" class='image-preview'></image>
-  <input placeholder='{{msg}}' class='comment-preview' bindinput='commentInput'></input>
-  <button class='upload' bindtap='uploadFile'>upload</button>
+  <view class='flex-input'>
+    <view class='desc'>
+    <text class="desc-desc">description</text>
+    <input placeholder='{{description}}' class = 'decription-preview'  bindinput='descriptionInput'></input>
+    </view>
+    <view class ='comment'>
+    <text class="comm-desc">comment</text>
+    <input placeholder='{{msg}}' class='comment-preview' bindinput='commentInput'></input>
+    </view>
+    <view class='button-group'>
+      <button class='cancel' bindtap='cancel'>cancel</button>
+      <button class='upload' bindtap='uploadFile'>upload</button>
+    </view>
+  </view>
 </view>
 </view>

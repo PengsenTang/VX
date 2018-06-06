@@ -11,8 +11,8 @@ Page({
     uploadUrl: 'https://www.wantcu.top/highlight/newHighlight',
     latitude: '',
     longtitude: '',
-    description: 'des',
-    msg: 'msg'
+    description: 'input your description.',
+    msg: 'how do you like it?'
   },
 
   /**
@@ -78,6 +78,11 @@ Page({
       msg:input.detail.value
     })
   },
+  descriptionInput(input){
+    this.setData({
+      description:input.detail.value
+    })
+  },
   uploadFile() {
     console.log('in uploadFile')
     var that = this;
@@ -109,4 +114,9 @@ Page({
       },
     })
   },
+  cancel(){
+    wx.navigateBack({
+      delta: 1
+    })
+  }
 })
