@@ -28,7 +28,8 @@ Page({
     latitude: '',
     longtitude: '',
     description: 'des',
-    msg: 'msg'
+    msg: 'msg',
+    showCamera:false,
   },
   onLoad: function () {
     var that = this;
@@ -138,7 +139,13 @@ Page({
     wx.showActionSheet({
       itemList: ['chooseImage','take a photo'],
       success: function(res){
-        that.chooseImage();
+        if(res.tapIndex == 0){
+          that.chooseImage();
+        }
+        else{
+          that.takePhoto();
+        }
+        
       },
       fail: function(res){
         console.log(res.errMsg)
@@ -150,7 +157,7 @@ Page({
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
+      sourceType: ['album'],
       success: function (res) {
         that.data.photoPath = res.tempFilePaths;
         console.log(that.data.photoPath);
@@ -161,4 +168,20 @@ Page({
       }
     })
   },
+  takePhoto(){
+    var that = this
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['camera'],
+      success: function (res) {
+        that.data.photoPath = res.tempFilePaths;
+        console.log(that.data.photoPath);
+        console.log("In camera");
+        wx.navigateTo({
+          url: '../preview/preview?photoPath=' + that.data.photoPath
+        })
+      }
+    })
+  }
 })
