@@ -1,14 +1,12 @@
 <view class="map_controller">
-<button type="default" size="mini" bindtap="scalesmaller">缩小</button>
-<button type="default" size="mini" bindtap="scalelarger">放大</button>
-<button type="default" size="mini" bindtap="findPoints">发现</button>
-<button type="default" size="mini" bindtap="newPoint">新建</button>
+  <icon type = "search" bindtap='findPoints'/>
+  <image class="icon" src="./add.png" bindtap='newPoint'></image>
 </view>
-<view class="section section_gap">
+ <view class="section section_gap">
   <view class="body-view">
     <slider bindchange="slider2change" min="16" max="20" value = "{{scale}}" show-value/>
   </view>
-</view>
+</view> 
 <view class="map_container">
   <map class="map" id="map"
     longitude="{{longitude}}"
@@ -25,18 +23,18 @@
   </map>
 </view>
 <view wx:if="{{show_detail}}" class = "detail_info">
-<view class="map_text">
-  <text>地点: {{textData.description}}</text>
-  <text>信息: {{textData.message}}</text>
-  <text>评分: {{textData.rate}}</text>
-  <image src="{{textData.snapshot}}"></image>
-</view>
-<view class="picker1">
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-    <view class="picker">
-      选择评分：{{array[index]}}
-    </view>
-  </picker>
-  <button class="submit_rate" type="default" size="mini" bindtap="submit_rate">提交评分</button>
-</view>
+  <view class="map_text">
+    <text>地点: {{textData.description}}</text>
+    <text>信息: {{textData.message}}</text>
+    <text>评分: {{textData.rate}}</text>
+    <image src="{{textData.snapshot}}"></image>
+  </view> 
+  <view class="picker1">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        选择评分：{{array[index]}}
+      </view>
+    </picker>
+    <button class="submit_rate" type="default" size="mini" bindtap="submit_rate">提交评分</button>
+  </view>
 </view>

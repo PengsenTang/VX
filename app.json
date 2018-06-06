@@ -1,15 +1,15 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/highlight/highlight",
     "pages/query/query",
+    "pages/index/index",
+    "pages/highlight/highlight",
+    "pages/logs/logs",
     "pages/preview/preview"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "放学去哪儿玩",
     "navigationBarTextStyle": "black"
   }
 }
