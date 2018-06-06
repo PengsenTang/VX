@@ -2,20 +2,28 @@
 
 // 引入高德地图api
 var database = require('fromdatabase.js');
+var Session = require('../../session');
 //获取应用实例
 const app = getApp()
-
+const rate = []
+for(let i=1;i<5;i++){
+  rate.push(i)
+}
 var markersData = [];
 Page({
   data: {
+    array:[1,2,3,4,5],
+    index:1,
     markers: [],
     circles: [],
     latitude: '',
     longitude: '',
     textData: {},
+    show_detail:false,
     scale: 18,
     maxScale: 20,
     minScale: 16,
+    currentPoint:'',
     // 20 经度 0.002 
     // 19 经度 0.004 直径 350m
     // 18 经度 0.008      700m
@@ -24,6 +32,7 @@ Page({
     mapContext: null,
     photoPath: '',
     uploadUrl: 'https://www.wantcu.top/highlight/newHighlight',
+    rateUrl:'https://www.wantcu.top/highlight/rate',
     // uploadUrl:'https://www.wantcu.top/users/newSite',
     latitude: '',
     longtitude: '',
@@ -44,10 +53,50 @@ Page({
     })  
 
   },
+  bindPickerChange:function(e){
+    var realvalue = e.detail.value
+    realvalue = parseInt(realvalue)
+    this.setData({
+      index:realvalue
+     })
+  },
+  submit_rate:function(){
+    var that = this
+    lid = markersData[this.data.currentPoint]['lid']
+    wx.request({
+      url: that.data.rateUrl,
+      method: 'POST',
+      data: {
+        rate: that.data.index+1,
+        locationid:lid
+      },
+      header: {
+        'content-type': 'application/json',
+        'Cookie': Session.get()
+      },
+      success: res => {
+        console.log(res.data)
+      }
+    })
+  },
+  slider2change: function(e){
+    var that = this;
+    var _scale = e.detail.value;
+    if (_scale > that.data.minScale) {
+      console.log(_scale)
+      that.setData({
+        scale: _scale
+      })
+    }
+  },
   // 点击marker
   makertap: function (e) {
     var id = e.markerId;
     var that = this;
+    that.setData({
+      show_detail:true
+    })
+    that.data.currentPoint = id;
     that.showMarkerInfo(markersData, id);
     that.changeMarkerColor(markersData, id);
   },

@@ -17,7 +17,10 @@ function queryPointsWithScale(_longitude, _latitude, _scale, callback) {
         data[i].width = 22;
         data[i].height = 22;
         data[i].id = i;
-        data[i].snapshot = 'http://www.wantcu.top/images/' + data[i].snapshot;
+        path = data[i].snapshot.split('/')
+        path = path[2]
+        console.log(path)
+        data[i].snapshot = 'https://www.wantcu.top/' + path;
       }
       callback(res.data)
     }

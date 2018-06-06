@@ -1,6 +1,6 @@
 .map_container{
   position: absolute;
-  top: 40px;
+  top: 100px;
   bottom: 200px;
   left: 0;
   right: 0;
@@ -26,4 +26,30 @@ text{
 .h1{
   margin: 15px 0;
   font-size:15px;
+}
+.section section_gap{
+  margin:15px;
+  padding: 10px;
+}
+.picker1{
+  position: absolute;
+  left: 185px;
+  right: 0;
+  bottom: 120px;
+  height: 80px;
+  background: #fff;
+  padding: 0 2px;
+}
+#picker{
+  width:150px;
+}
+text{
+  width:170px;
+}
+.submit_rate{
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  background: #fff;
+  margin-top: 17px;
 }

@@ -7,14 +7,11 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler"> To Authorize </button>
-          <view bindtap="newHighlight" class="demo">
+  <!-- <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler"> To Authorize </button> -->
+          <!-- <view bindtap="newHighlight" class="demo">
             <view class="link">newHighlight ></view>
-          </view>
+          </view> -->
           <view bindtap="queryHighlight" class="demo">
             <view class="link">queryHighlight ></view>
           </view>
-<view class="container">
-          <button bindtap='withOpenid'>does open id work here?</button>
-</view>
 </view>
