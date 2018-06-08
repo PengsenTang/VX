@@ -1,19 +1,19 @@
 <!--pages/preview/preview.wxml.wxml-->
 <view class='container'>
 <view class='preview'>
-  <image src = "{{photoPath}}" class='image-preview'></image>
+  <view class='send'>
+  <image src='./send.png' bindtap='uploadFile'/>
+  </view>
+  <image src="{{photoPath}}" class='image-preview'></image>
   <view class='flex-input'>
     <view class='desc'>
-    <text class="desc-desc">description</text>
-    <input placeholder='{{description}}' class = 'decription-preview'  bindinput='descriptionInput'></input>
+    <input placeholder='描述一下这里吧' bindinput='descriptionInput' maxlength='12'></input>
     </view>
-    <view class ='comment'>
-    <text class="comm-desc">comment</text>
-    <input placeholder='{{msg}}' class='comment-preview' bindinput='commentInput'></input>
+    <view class='comment'>
+    <input placeholder='想对后面的人说什么呢?' bindinput='commentInput' maxlength='18'/>
     </view>
-    <view class='button-group'>
-      <button class='cancel' bindtap='cancel'>cancel</button>
-      <button class='upload' bindtap='uploadFile'>upload</button>
+    <view class='logo'>
+        <image src='./logo.png'></image>
     </view>
   </view>
 </view>
