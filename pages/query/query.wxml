@@ -1,13 +1,17 @@
 <view class="map_controller">
-  <icon type = "search" bindtap='findPoints'/>
-  <image class="icon" src="./add.png" bindtap='newPoint'></image>
+  <!-- <iframe src="./add.svg" height="100" width="100"/> -->
 </view>
- <view class="section section_gap">
+
+ <view class="section_gap">
   <view class="body-view">
-    <slider bindchange="slider2change" min="16" max="20" value = "{{scale}}" show-value/>
+    <slider bindchange="slider2change" activeColor="#99ccff" min="16" max="20" value = "{{scale}}" />
+    
+     <image class="icon" src="./add.png" bindtap='newPoint'></image> 
+  
   </view>
-</view> 
-<view class="map_container">
+</view>
+
+<view class="map_container" wx:if="{{showMap}}">
   <map class="map" id="map"
     longitude="{{longitude}}"
     latitude="{{latitude}}"
@@ -22,7 +26,13 @@
   <!-- bindcontroltap 为绑定的缩放控件的处理函数 -->
   </map>
 </view>
-<view wx:if="{{show_detail}}" class = "detail_info">
+
+<view class='yourPurse' >
+  <image src="./search.png" class="slogan" bindtap='findPoints'></image>
+</view>
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<!-- <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> -->
+<view animation="{{animationData}}" wx:if="{{showModalStatus}}" class = "commodity_attr_box">
   <view class="map_text">
     <text>地点: {{textData.description}}</text>
     <text>信息: {{textData.message}}</text>
@@ -31,8 +41,11 @@
   </view> 
   <view class="picker1">
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-      <view class="picker">
-        选择评分：{{array[index]}}
+      <view wx:if="{{currentRate>1}}" class="picker">
+        当前评分：{{array[index]}}
+      </view>
+      <view wx:else class="picker">
+        尚未评分，请选择：{{array[index]}}
       </view>
     </picker>
     <button class="submit_rate" type="default" size="mini" bindtap="submit_rate">提交评分</button>

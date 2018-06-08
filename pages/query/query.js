@@ -24,6 +24,7 @@ Page({
     maxScale: 20,
     minScale: 16,
     currentPoint:'',
+    currentRate:'',
     // 20 经度 0.002 
     // 19 经度 0.004 直径 350m
     // 18 经度 0.008      700m
@@ -39,6 +40,8 @@ Page({
     description: 'des',
     msg: 'msg',
     showCamera:false,
+    showModalStatus:false,
+    showMap:true
   },
   onLoad: function () {
     var that = this;
@@ -76,14 +79,22 @@ Page({
         'Cookie': Session.get()
       },
       success: res => {
-        console.log(res.data)
+        that.setData({
+          currentRate:that.data.index+1
+        })
+        this.hideModal();
+        wx.showToast({
+          title: '评分成功',
+          icon: 'success',
+          duration:2000
+        })
       }
     })
   },
   slider2change: function(e){
     var that = this;
     var _scale = e.detail.value;
-    if (_scale > that.data.minScale) {
+    if (_scale >= that.data.minScale) {
       console.log(_scale)
       that.setData({
         scale: _scale
@@ -95,9 +106,13 @@ Page({
     var id = e.markerId;
     var that = this;
     that.setData({
-      show_detail:true
+      show_detail:true,
+      showModalStatus:true,
+      showMap:false,
+      currentPoint:id,
+      currentRate:markersData[id].yourrate
     })
-    that.data.currentPoint = id;
+    console.log(that.data.currentRate)
     that.showMarkerInfo(markersData, id);
     that.changeMarkerColor(markersData, id);
   },
@@ -172,6 +187,9 @@ Page({
     var longitude = that.data.longitude;
     var latitude = that.data.latitude
     var scale = that.data.scale
+    this.setData({
+      show_detail:false
+    })
     database.queryPointsWithScale(longitude, latitude, scale, function (data){
       markersData = data;
       that.setData({
@@ -232,5 +250,46 @@ Page({
         })
       }
     })
+  },
+  showModal: function () {
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  hideModal: function () {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showMap:true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   }
 })

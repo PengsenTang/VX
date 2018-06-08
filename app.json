@@ -1,15 +1,15 @@
 {
   "pages": [
+    
     "pages/query/query",
-    "pages/index/index",
-    "pages/highlight/highlight",
-    "pages/logs/logs",
-    "pages/preview/preview"
+    "pages/preview/preview",
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#f4eede",
     "navigationBarTitleText": "放学去哪儿玩",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "backgroundColor":"#f4eede"
   }
 }

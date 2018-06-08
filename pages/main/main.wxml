@@ -1,4 +1,0 @@
-<view>
-  <button class='uploadImage' bindtap='chooseImage'>upload ur file</button>
-  <image src="{{imagesrc}}"></image>
-</view>

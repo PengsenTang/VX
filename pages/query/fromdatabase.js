@@ -1,3 +1,4 @@
+var Session = require('../../session');
 function queryPointsWithScale(_longitude, _latitude, _scale, callback) {
   wx.request({
     url: 'https://www.wantcu.top/Highlight/query',
@@ -7,15 +8,16 @@ function queryPointsWithScale(_longitude, _latitude, _scale, callback) {
       scale: _scale
     },
     header: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Cookie':Session.get()
     },
     success: function (res) {
       var data = res.data;
       console.log(data)
       for (var i = 0; i < data.length; i++){
         data[i].iconPath = "marker.png";
-        data[i].width = 22;
-        data[i].height = 22;
+        data[i].width = 24;
+        data[i].height =48;
         data[i].id = i;
         path = data[i].snapshot.split('/')
         path = path[2]
