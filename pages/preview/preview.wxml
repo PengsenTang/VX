@@ -4,7 +4,7 @@
   <view class='send'>
   <image src='./send.png' bindtap='uploadFile'/>
   </view>
-  <image src="{{photoPath}}" class='image-preview'></image>
+  <image mode='aspectFit' src="{{photoPath}}" class='image-preview'></image>
   <view class='flex-input'>
     <view class='desc'>
     <input placeholder='描述一下这里吧' bindinput='descriptionInput' maxlength='12'></input>
