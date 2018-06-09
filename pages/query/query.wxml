@@ -1,53 +1,42 @@
-<view class="map_controller">
-  <!-- <iframe src="./add.svg" height="100" width="100"/> -->
+<view class="section_gap">
+  <slider bindchange="slider2change" activeColor="#99ccff" min="16" max="20" value="{{scale}}"/>
+  <image class="icon" src="./add.png" bindtap='newPoint'/> 
 </view>
 
- <view class="section_gap">
-  <view class="body-view">
-    <slider bindchange="slider2change" activeColor="#99ccff" min="16" max="20" value = "{{scale}}" />
-    
-     <image class="icon" src="./add.png" bindtap='newPoint'></image> 
-  
-  </view>
-</view>
-
-<view class="map_container" wx:if="{{showMap}}">
+<view class="map_container">
   <map class="map" id="map"
     longitude="{{longitude}}"
     latitude="{{latitude}}"
     scale="{{scale}}"
     markers="{{markers}}"
     circles="{{circles}}"
-    bindmarkertap="makertap"  
+    bindmarkertap="markertap"  
     bindregionchange="regionchange"
   >
-  <!-- bindmarkertap 为绑定的点击marker的处理函数 -->
-  <!-- bindregionchange 为绑定的移动地图后的处理函数 -->
-  <!-- bindcontroltap 为绑定的缩放控件的处理函数 -->
   </map>
 </view>
 
 <view class='yourPurse' >
   <image mode='aspectFit' src="./search.png" class="slogan" bindtap='findPoints'></image>
 </view>
-<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
-<!-- <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> -->
-<view animation="{{animationData}}" wx:if="{{showModalStatus}}" class = "commodity_attr_box">
-  <view class="map_text">
-    <text>简介: {{textData.description}}</text>
-    <text>寄语: {{textData.message}}</text>
-    <text>评分: {{textData.rate}}</text>
-    <image mode='aspectFit' class="preview_image" src="{{textData.snapshot}}"></image>
-  </view> 
-  <view class="picker1">
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-      <view wx:if="{{currentRate>1}}" class="picker">
-        当前评分：{{array[index]}}
-      </view>
-      <view wx:else class="picker">
-        尚未评分，请选择：{{array[index]}}
-      </view>
-    </picker>
-    <button class="submit_rate" type="default" size="mini" bindtap="submit_rate">提交评分</button>
+
+<view class="preview_mask" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view class="preview_card" animation="{{animationData}}" wx:if="{{showModalStatus}}">  
+  <view class='preview_stars'>
+    <image class='rate_star {{starStyle[0]}}' mode='aspectFit' src='./star.png' bindtap='setStarOne'/>
+    <image class='rate_star {{starStyle[1]}}' mode='aspectFit' src='./star.png' bindtap='setStarTwo'/>
+    <image class='rate_star {{starStyle[2]}}' mode='aspectFit' src='./star.png' bindtap='setStarThree'/>
+    <image class='rate_star {{starStyle[3]}}' mode='aspectFit' src='./star.png' bindtap='setStarFour'/>
+    <image class='rate_star {{starStyle[4]}}' mode='aspectFit' src='./star.png' bindtap='setStarFive'/>
+    <text class='rate_number'>{{textData.rate}}</text> 
+  </view>
+  <view class='preview_image'>
+    <image mode='aspectFit' src="{{textData.snapshot}}"/>
+  </view>
+  <view class="preview_title">
+    <text>{{textData.description}}</text>
+  </view>
+  <view class='preview_msg'>
+    <text>{{textData.message}}</text>
   </view>
 </view>

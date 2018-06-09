@@ -6,12 +6,6 @@
   right: 0;
   box-shadow:0 0 10px #888888;
 }
-.map_controller{
-  top: 50px;
-  margin-bottom: 0px;
-  margin-left: 250px;
-  right: 0;
-}
 .map{
   width: 100%;
   height: 100%;
@@ -67,34 +61,94 @@ slider{
   background: #fff;
   margin-top: 5px;
 }
-
 .yourPurse {
-  margin-top:380px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
 }
-.commodity_screen {
+.slogan{
+  width:70%;
+  margin:auto auto;
+  height: 100%;
+  position: absolute;
+  left: 15%;
+}
+
+
+/* 地点详情弹窗 */
+
+.preview_mask {
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  background: #000;
+  background: #000000;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 3;
+}
+.preview_card {
+  width: 80%;
+  overflow: hidden;
+  position: relative;
+  left: 10%;
+  top: 10%;
+  background: #fff;
+  z-index: 4;
+  border-radius: 5px;
+  box-shadow: 0 0 30px #ccc;
+}
+.preview_stars{
+  margin: 10px;
+  text-align: right;
+  position: relative;
+  padding-right: 40px;
+}
+.rate_star{
+  width: 24px;
+  height: 24px;
+}
+.star_none{
   opacity: 0.2;
-  overflow: hidden;
-  z-index: 1000;
-  color: #fff;
 }
-
-.commodity_attr_box {
+.star_full{
+  opacity: 1;
+}
+.rate_number{
+  margin: 0;
+  display: inline-block;
+  font-size: 18px;
+  color: #ffcc33;
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+  width: 40px;
+  text-align: center;
+}
+.preview_image{
+  width: 80%;
+  padding: 0 10%; 
+}
+.preview_image image{
   width: 100%;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 2000;
-  background: #f4eede;
-  padding-top: 500px;
+  height: 240px;
+  box-shadow: 0 0 10px #ccc inset;
 }
-.slogan{
-  width:70%;
-  margin:0 auto;
+.preview_title {
+  width: 90%;
+  padding: 0 5%;
+}
+.preview_title text{
+  font-size: 22px;
+}
+.preview_msg {
+  width: 90%;
+  padding: 0 5%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.preview_msg text {
+  font-size: 14px;
 }
