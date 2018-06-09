@@ -67,7 +67,6 @@ Page({
     var that = this;
     var _scale = e.detail.value;
     if (_scale >= that.data.minScale) {
-      console.log(_scale)
       that.setData({
         scale: _scale
       })
@@ -244,7 +243,6 @@ Page({
         
       },
       fail: function(res){
-        console.log(res.errMsg)
       }
     })
   },
@@ -256,8 +254,6 @@ Page({
       sourceType: ['album'],
       success: function (res) {
         that.data.photoPath = res.tempFilePaths;
-        console.log(that.data.photoPath);
-        console.log("In chooseImage");
         wx.navigateTo({
           url: '../preview/preview?photoPath=' + that.data.photoPath 
         })
@@ -272,8 +268,6 @@ Page({
       sourceType: ['camera'],
       success: function (res) {
         that.data.photoPath = res.tempFilePaths;
-        console.log(that.data.photoPath);
-        console.log("In camera");
         wx.navigateTo({
           url: '../preview/preview?photoPath=' + that.data.photoPath
         })

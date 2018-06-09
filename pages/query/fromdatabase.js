@@ -13,7 +13,6 @@ function queryPointsWithScale(_longitude, _latitude, _scale, callback) {
     },
     success: function (res) {
       var data = res.data;
-      console.log(data)
       for (var i = 0; i < data.length; i++){
         data[i].iconPath = "marker.png";
         data[i].width = 24;
@@ -21,7 +20,6 @@ function queryPointsWithScale(_longitude, _latitude, _scale, callback) {
         data[i].id = i;
         path = data[i].snapshot.split('/')
         path = path[2]
-        console.log(path)
         data[i].snapshot = 'https://www.wantcu.top/' + path;
       }
       callback(res.data)

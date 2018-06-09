@@ -22,7 +22,6 @@ Page({
     this.setData({
       photoPath: options.photoPath
     })
-    console.log(options.photoPath)
   },
 
   /**
@@ -84,7 +83,6 @@ Page({
     })
   },
   uploadFile() {
-    console.log('in uploadFile')
     var that = this;
     wx.getLocation({
       success: function (res) {
@@ -110,7 +108,6 @@ Page({
         })
       },
       fail: function (res) {
-        console.log(res.errMsg)
       },
     })
   },
